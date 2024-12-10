@@ -1,0 +1,54 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type UserSetting {
+  userId: Int!
+  receiveNotifications: Boolean!
+  receiveEmails: Boolean!
+}
+
+type User {
+  id: Int!
+  username: String!
+  displayName: String
+  settings: UserSetting
+}
+
+type Department {
+  id: Int!
+  name: String!
+  parent: Department
+  subDepartments: [Department!]
+}
+
+type Query {
+  getUserById(id: Int!): User
+  getUsers: [User!]!
+  getDepartments: [Department!]!
+}
+
+type Mutation {
+  createUser(createUserData: CreateUserInput!): User!
+  createUserSettings(createUserSettingsData: CreateUserSettingsInput!): UserSetting!
+  createDepartment(createDepartmentData: CreateDepartmentInput!): Department!
+  updateDepartment(id: Float!, name: String!): Department!
+  deleteDepartment(id: Float!): Boolean!
+  login(username: String!, password: String!): String!
+}
+
+input CreateUserInput {
+  username: String!
+  displayName: String
+}
+
+input CreateUserSettingsInput {
+  userId: Int!
+  receiveNotifications: Boolean = false
+  receiveEmails: Boolean = false
+}
+
+input CreateDepartmentInput {
+  name: String!
+  subDepartments: [CreateDepartmentInput!]
+}
